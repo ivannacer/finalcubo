@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
+        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
+    </head>
+
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+	<a-scene embedded arjs='sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 3x3;' renderer='precision: medium;'>
+
+		<!-- hiro / ratón bailando-->
+		<a-marker type='hiro' value='5'>
+			<a-entity
+            position="0 1 0"
+			rotation="-90 0 0" 
+            scale="2 2 2"
+			animation-mixer="loop: repeat"
+            gltf-model="modelo3d/hiro.glb"
+            ></a-entity>
+		</a-marker>
+
+		<!-- matrix / ladybug -->
+		<a-marker type='barcode' value='5'>
+			<a-entity
+            position="0 1 0"
+			rotation="-90 -90 0" 
+            scale="0.5 0.5 0.5"
+			animation-mixer="loop: repeat"
+            gltf-model="modelo3d/prueba.glb"
+            ></a-entity>
+		</a-marker>
+
+		<!-- kanji -->
+        <a-marker preset='kanji'>
+			<a-entity animation="property:rotation; to: 0 360 0; loop: true; dur: 10000; "
+            geometry="primitive: sphere; radius: 1;" 
+            position="0 0 0"
+            rotation="0 0 -5" 
+            material="src: url(texturas/2.jpeg)"></a-entity>
+         </a-entity>
+
+         <a-entity animation="property:rotation; to: 0 360 0; loop: true; dur: 10000; "
+            geometry="primitive: sphere; radius: 1;" 
+            position="3 1 1"
+            rotation="0 0 -5" 
+            material="src: url(texturas/caramel.webp)"></a-entity>
+         </a-entity>
+
+         <a-entity animation="property:rotation; to: 0 360 0; loop: true; dur: 10000; "
+            geometry="primitive: sphere; radius: 1;" 
+            position="3 1 -3"
+            rotation="0 0 -5" 
+            material="src: url(texturas/3.jpeg)"></a-entity>
+         </a-entity>
+		</a-marker>
+
+        <a-assets>
+            <a-asset-item
+               id="animated-asset"
+               src="modelo3d/nave4.glb"
+            ></a-asset-item>
+
+        </a-assets>
+        <!--  Marcador F  -->
+		
+		<a-marker
+            type="pattern"
+            preset="custom"
+            url="assets/marker1.patt"
+            raycaster="objects: .clickable"
+            emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;"
+            id="markerA">
+            <a-entity
+                scale="0.3 0.3 0.3"
+                animation-mixer="loop: repeat"
+                gltf-model="#animated-asset"
+                class="clickable"
+                gesture-handler
+            ></a-entity>
+        </a-marker>
+
+        <a-asset-item
+        id="animated-nefer"
+        src="modelo3d/matrix.glb"
+     ></a-asset-item>
+      
+     <!--  Marcador planeta  -->
+		
+		<a-marker
+        type="pattern"
+        preset="custom"
+        url="assets/marker4.patt"
+        raycaster="objects: .clickable"
+        emitevents="true"
+        cursor="fuse: false; rayOrigin: mouse;"
+        id="markerA"
+    >
+        <a-entity
+            scale="000.1 000.1 000.1"
+            rotation="0 0 0"
+            animation-mixer="loop: repeat"
+            gltf-model="#animated-nefer"
+            class="clickable"
+            gesture-handler
+        ></a-entity>
+    </a-marker>
+    
+
+		<a-entity camera></a-entity>
+</body>
+</html>
